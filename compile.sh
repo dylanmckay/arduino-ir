@@ -19,10 +19,6 @@ function compile {
   compile_clang "$@"
 }
 
-echo Compiling sketch...
-
-compile ~/Desktop/Blink/Blink.cpp
-
 echo Compiling core...
 
 compile Arduino/WInterrupts.c
