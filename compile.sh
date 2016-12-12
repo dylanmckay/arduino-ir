@@ -11,8 +11,8 @@ mkdir $OUT_DIR
 
 function compile_clang {
   SRC=$1
-  DST=$OUT_DIR/$(basename $SRC).o
-  $CC -c $SRC -o $DST $CXXFLAGS
+  DST=$OUT_DIR/$(basename $SRC).ll
+  $CC -c -S -emit-llvm $SRC -o $DST $CXXFLAGS
 }
 
 function compile {
