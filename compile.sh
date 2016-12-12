@@ -1,6 +1,6 @@
 export CC=~/projects/builds/llvm/bin/clang++
 
-OUT_DIR=out
+OUT_DIR=ir
 
 WARNINGS="-Wno-unknown-attributes -Wno-deprecated -Wno-unused-volatile-lvalue"
 DEFINES="-DF_CPU=16000000L -DARDUINO=10613 -DARDUINO_AVR_UNO -DARDUINO_ARCH_AVR -D__AVR_ATmega328P__"
@@ -13,6 +13,10 @@ function compile_clang {
   SRC=$1
   DST=$OUT_DIR/$(basename $SRC).ll
   $CC -c -S -emit-llvm $SRC -o $DST $CXXFLAGS
+
+  if [ $? -ne 0 ]; then
+    echo "; Error while compiling $SRC" > $DST
+  fi
 }
 
 function compile {
