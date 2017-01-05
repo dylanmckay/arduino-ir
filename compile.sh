@@ -12,7 +12,11 @@ mkdir $OUT_DIR
 function compile_clang {
   SRC=$1
   DST=$OUT_DIR/$(basename $SRC).ll
-  $CC -c -S -emit-llvm $SRC -o $DST $CXXFLAGS
+  CMD="$CC -c -S -emit-llvm $SRC -o $DST $CXXFLAGS"
+
+  echo running: $CMD
+
+  $CMD
 
   if [ $? -ne 0 ]; then
     echo "; Error while compiling $SRC" > $DST
